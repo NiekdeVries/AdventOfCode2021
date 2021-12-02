@@ -2,42 +2,44 @@ package day2;
 
 import utils.InputHandler;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 public class Dive {
-    private static int dive(Stream<String> inputs) {
-        int horizontal_pos = 0, depth = 0;
-        for (String[] input : inputs.map(s -> s.split(" ")).toList()) {
+    private static void dive(Stream<String> inputs) {
+        AtomicInteger horizontal = new AtomicInteger();
+        AtomicInteger depth = new AtomicInteger();
+        inputs.map(input -> input.split(" ")).forEach(input -> {
             switch(input[0]) {
-                case "forward" -> horizontal_pos += Integer.parseInt(input[1]);
-                case "down" -> depth += Integer.parseInt(input[1]);
-                case "up" -> depth -= Integer.parseInt(input[1]);
+                case "forward" -> horizontal.addAndGet(Integer.parseInt(input[1]));
+                case "down" -> depth.addAndGet(Integer.parseInt(input[1]));
+                case "up" -> depth.addAndGet(-Integer.parseInt(input[1]));
                 default -> throw new IllegalStateException("Unexpected value: " + input[0]);
             }
-        }
-        System.out.println("horizontal position: " + horizontal_pos + ", depth: " + depth);
-        return horizontal_pos * depth;
+        });
+        System.out.printf("horizontal position %s * depth %s = %s%n", horizontal, depth, horizontal.get() * depth.get());
     }
 
-    private static int diveWithAim(Stream<String> inputs) {
-        int horizontal_pos = 0, depth = 0, aim = 0;
-        for (String[] input : inputs.map(s -> s.split(" ")).toList()) {
+    private static void diveWithAim(Stream<String> inputs) {
+        AtomicInteger horizontal = new AtomicInteger();
+        AtomicInteger depth = new AtomicInteger();
+        AtomicInteger aim = new AtomicInteger();
+        inputs.map(s -> s.split(" ")).forEach(input -> {
             switch(input[0]) {
                 case "forward" -> {
-                    horizontal_pos += Integer.parseInt(input[1]);
-                    depth +=  aim * Integer.parseInt(input[1]);
+                    horizontal.addAndGet(Integer.parseInt(input[1]));
+                    depth.addAndGet(aim.get() * Integer.parseInt(input[1]));
                 }
-                case "down" -> aim += Integer.parseInt(input[1]);
-                case "up" -> aim -= Integer.parseInt(input[1]);
+                case "down" -> aim.addAndGet(Integer.parseInt(input[1]));
+                case "up" -> aim.addAndGet(-Integer.parseInt(input[1]));
                 default -> throw new IllegalStateException("Unexpected value: " + input[0]);
             }
-        }
-        System.out.println("horizontal position: " + horizontal_pos + ", depth: " + depth);
-        return horizontal_pos * depth;
+        });
+        System.out.printf("horizontal position %s * depth %s = %s%n", horizontal, depth, horizontal.get() * depth.get());
     }
 
     public static void main(String[] args) {
-        System.out.println("horizontal position * depth = " + dive(InputHandler.getStringStream("day2/Dive.txt")));
-        System.out.println("horizontal position * depth = " + diveWithAim(InputHandler.getStringStream("day2/Dive.txt")));
+        dive(InputHandler.getStringStream("day2/Dive.txt"));
+        diveWithAim(InputHandler.getStringStream("day2/Dive.txt"));
     }
 }
