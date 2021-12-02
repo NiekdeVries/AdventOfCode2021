@@ -23,7 +23,7 @@ public class SonarSweep {
     }
 
     public static void main(String[] args) {
-        measure("Day1/SonarSweep.txt", 1);
-        measure("Day1/SonarSweep.txt", 3);
+        measure("day1/SonarSweep.txt", 1);
+        measure("day1/SonarSweep.txt", 3);
     }
 }

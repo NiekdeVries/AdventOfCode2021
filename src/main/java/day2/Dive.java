@@ -37,7 +37,7 @@ public class Dive {
     }
 
     public static void main(String[] args) {
-        System.out.println("horizontal position * depth = " + dive(InputHandler.getStringStream("Day2/Dive.txt")));
-        System.out.println("horizontal position * depth = " + diveWithAim(InputHandler.getStringStream("Day2/Dive.txt")));
+        System.out.println("horizontal position * depth = " + dive(InputHandler.getStringStream("day2/Dive.txt")));
+        System.out.println("horizontal position * depth = " + diveWithAim(InputHandler.getStringStream("day2/Dive.txt")));
     }
 }
