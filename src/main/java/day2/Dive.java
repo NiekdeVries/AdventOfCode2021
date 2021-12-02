@@ -1,6 +1,6 @@
-package Day2;
+package day2;
 
-import Util.InputHandler;
+import utils.InputHandler;
 
 import java.util.stream.Stream;
 

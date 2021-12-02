@@ -1,7 +1,7 @@
-package Day1;
+package day1;
 
-import Util.InputHandler;
-import Util.StreamUtils;
+import utils.InputHandler;
+import utils.StreamUtils;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
